@@ -3,7 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.28010.2036
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AnalogVoltageController", "AnalogVoltageController\AnalogVoltageController.csproj", "{9FF8189E-E97A-4AA7-8F15-EE5E4646D884}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AnalogVoltageControllerDashboard", "AnalogVoltageController\AnalogVoltageControllerDashboard.csproj", "{9FF8189E-E97A-4AA7-8F15-EE5E4646D884}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AnalogVoltageController.Models", "AnalogVoltageController.Models\AnalogVoltageController.Models.csproj", "{FB68C1F2-2ACE-466D-94C9-333FF2B8C82D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AnalogVoltageWriter.Tests", "AnalogVoltageWriter.Tests\AnalogVoltageWriter.Tests.csproj", "{1DB8262F-8B75-4926-AB1F-C393BE740EE7}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +19,14 @@ Global
 		{9FF8189E-E97A-4AA7-8F15-EE5E4646D884}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{9FF8189E-E97A-4AA7-8F15-EE5E4646D884}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{9FF8189E-E97A-4AA7-8F15-EE5E4646D884}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FB68C1F2-2ACE-466D-94C9-333FF2B8C82D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FB68C1F2-2ACE-466D-94C9-333FF2B8C82D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FB68C1F2-2ACE-466D-94C9-333FF2B8C82D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FB68C1F2-2ACE-466D-94C9-333FF2B8C82D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1DB8262F-8B75-4926-AB1F-C393BE740EE7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1DB8262F-8B75-4926-AB1F-C393BE740EE7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1DB8262F-8B75-4926-AB1F-C393BE740EE7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1DB8262F-8B75-4926-AB1F-C393BE740EE7}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
