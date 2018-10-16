@@ -1,14 +1,13 @@
 ﻿using AnalogVoltageController.Models;
-using LiveCharts;
-using LiveCharts.Wpf;
 using System.ComponentModel;
 
-
-namespace AnalogVoltageController.AnalogVoltageWriters
+namespace AnalogVoltageController
 {
-    public class AnalogVoltageWriterViewModel : INotifyPropertyChanged
+    public class DashboardViewModel : INotifyPropertyChanged
     {
         private IVoltageWriter writer = new AnalogVoltageWriter();
+        private string _physicalChannel;
+        private string _displayMessage;
 
         private double _voltage;
         public double Voltage
@@ -16,7 +15,7 @@ namespace AnalogVoltageController.AnalogVoltageWriters
             get { return _voltage; }
             set
             {
-                if(_voltage != value)
+                if (_voltage != value)
                 {
                     _voltage = value;
                     PropertyChanged(this, new PropertyChangedEventArgs("Voltage"));
