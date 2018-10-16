@@ -61,7 +61,6 @@
     <Compile Include="AnalogVoltageWriter.cs" />
     <Compile Include="IVoltageWriter.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="VoltageOutput.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />

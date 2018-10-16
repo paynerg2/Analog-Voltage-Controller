@@ -6,7 +6,7 @@ namespace AnalogVoltageController.Models
 {
     public class AnalogVoltageWriter : IVoltageWriter, INotifyPropertyChanged
     {
-        public VoltageOutput Voltage { get; set; }
+        public double Voltage { get; set; }
 
         public event PropertyChangedEventHandler PropertyChanged = delegate { };
 
@@ -32,12 +32,12 @@ namespace AnalogVoltageController.Models
             return analogWriteTask;
         }
 
-        public void Write(DaqStream stream, VoltageOutput voltage)
+        public void Write(DaqStream stream, double voltage)
         {
             try
             {
                 var writer = new AnalogSingleChannelWriter(stream);
-                writer.WriteSingleSample(true, voltage.Value);
+                writer.WriteSingleSample(true, voltage);
             }
             catch(DaqException ex)
             {

@@ -4,6 +4,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:AnalogVoltageController"
+        local:MvvmBehaviors.LoadedMethodName="LoadPhysicalChannels"
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
     <Window.DataContext>
@@ -23,7 +24,9 @@
 
         <ComboBox x:Name="PhysicalChannelComboBox" 
                   Grid.Row="2" Grid.Column="2" 
-                  Height="30" Width="200"/>
+                  Height="30" Width="200"
+                  ItemsSource="{Binding PhysicalChannels}"
+                  SelectedItem="{Binding SelectedPhysicalChannel}"/>
 
         <ScrollBar x:Name="VoltageValueScrollbar"
                    Grid.Row="1" Grid.Column="1"
