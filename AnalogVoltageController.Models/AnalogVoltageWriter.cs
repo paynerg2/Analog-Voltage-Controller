@@ -1,6 +1,5 @@
-﻿using System;
+﻿using NationalInstruments.DAQmx;
 using System.ComponentModel;
-using NationalInstruments.DAQmx;
 
 namespace AnalogVoltageController.Models
 {
@@ -12,21 +11,18 @@ namespace AnalogVoltageController.Models
 
         public Task Initialize(string physicalChannelName)
         {
-            Task analogWriteTask = null;
+            // Note: NationalInstruments.DAQmx.Task
+            Task analogWriteTask = new Task();
+            analogWriteTask.AOChannels.CreateVoltageChannel(physicalChannelName, nameToAssignChannel: "",
+                                                            minimumValue: -10, maximumValue: 10, AOVoltageUnits.Volts);
             try
             {
-                // Note: NationalInstruments.DAQmx.Task
-                analogWriteTask = new Task();
-                analogWriteTask.AOChannels.CreateVoltageChannel(physicalChannelName,
-                                                                nameToAssignChannel: "", 
-                                                                minimumValue: -10, 
-                                                                maximumValue: 10,
-                                                                AOVoltageUnits.Volts);
+                
                 analogWriteTask.Control(TaskAction.Verify);
             }
-            catch (DaqException ex)
+            catch (DaqException)
             {
-                //Handle exception
+                analogWriteTask.Stop();
                 throw;
             }
             return analogWriteTask;

@@ -2,6 +2,7 @@
 using NationalInstruments.DAQmx;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
+using DaqTask = NationalInstruments.DAQmx.Task;
 
 namespace AnalogVoltageController
 {
@@ -12,6 +13,7 @@ namespace AnalogVoltageController
         private string _selectedPhysicalChannel = string.Empty;
         private double _voltage = 0;
         private IVoltageWriter writer = new AnalogVoltageWriter();
+        private DaqTask daqTask = null;
 
         public double Voltage
         {
@@ -28,13 +30,25 @@ namespace AnalogVoltageController
         public string SelectedPhysicalChannel
         {
             get { return _selectedPhysicalChannel; }
-            set { SetProperty(ref _selectedPhysicalChannel, value); }
+            set
+            {
+                SetProperty(ref _selectedPhysicalChannel, value);
+                if (daqTask != null) daqTask.Stop();
+                daqTask = writer.Initialize(_selectedPhysicalChannel);
+            }
         }
 
         public string DisplayMessage
         {
             get { return _displayMessage; }
             set { SetProperty(ref _displayMessage, value); }
+        }
+
+        public RelayCommand OutputCommand { get; private set; }
+
+        public DashboardViewModel()
+        {
+            OutputCommand = new RelayCommand(OnOutput, CanOutput);
         }
 
         public void LoadPhysicalChannels()
@@ -52,5 +66,17 @@ namespace AnalogVoltageController
 
         // TODO: Implement Update behavior when the slider is
         //       changed.
+
+        private bool CanOutput()
+        {
+            return _selectedPhysicalChannel != string.Empty;
+        }
+
+        private void OnOutput()
+        {
+            // Output voltage
+        }
+
+        
     }
 }

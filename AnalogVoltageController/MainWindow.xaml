@@ -5,11 +5,17 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:AnalogVoltageController"
         local:MvvmBehaviors.LoadedMethodName="LoadPhysicalChannels"
+        xmlns:converters="clr-namespace:AnalogVoltageController.Converters"
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
+    
     <Window.DataContext>
         <local:DashboardViewModel />
     </Window.DataContext>
+    <Window.Resources>
+        <converters:ScrollbarToVoltageConverter x:Key="converter" />
+    </Window.Resources>
+    
     <Grid Background="#222">
         <Grid.RowDefinitions>
             <RowDefinition Height="*" />
@@ -28,14 +34,23 @@
                   ItemsSource="{Binding PhysicalChannels}"
                   SelectedItem="{Binding SelectedPhysicalChannel}"/>
 
+        <Label x:Name="VoltageValueLabel"
+               Grid.Row="1" Grid.Column="1"
+               Foreground="Azure"
+               Content="{Binding Voltage}" />
         <ScrollBar x:Name="VoltageValueScrollbar"
                    Grid.Row="1" Grid.Column="1"
                    Orientation="Horizontal" Width="auto" Height="30"
+                   Value="{Binding Voltage, TargetNullValue=100, FallbackValue=100,
+                        Converter={StaticResource converter},
+                        Mode=OneWayToSource}"
+                   Minimum="0" Maximum="200" SmallChange="1"
                    />
 
         <Button x:Name="PowerButton"
                 Grid.Row="0" Grid.Column="0"
                 Content="Start" 
+                Command="{Binding OutputCommand }"
                 Height="auto" Width="50"
                 Margin="10"/>
 
