@@ -35,6 +35,7 @@ namespace AnalogVoltageController
                 SetProperty(ref _selectedPhysicalChannel, value);
                 if (daqTask != null) daqTask.Stop();
                 daqTask = writer.Initialize(_selectedPhysicalChannel);
+                OutputCommand.RaiseCanExecuteChanged();
             }
         }
 
@@ -61,9 +62,6 @@ namespace AnalogVoltageController
             PhysicalChannels = new ObservableCollection<string>(channels);
         }
 
-        // TODO: Implement CanStart/OnStart command for start
-        //       button.
-
         // TODO: Implement Update behavior when the slider is
         //       changed.
 
@@ -74,7 +72,7 @@ namespace AnalogVoltageController
 
         private void OnOutput()
         {
-            // Output voltage
+            writer.Write(daqTask.Stream, Voltage);
         }
 
         
