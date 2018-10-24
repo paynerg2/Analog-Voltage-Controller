@@ -62,8 +62,7 @@ namespace AnalogVoltageController
             PhysicalChannels = new ObservableCollection<string>(channels);
         }
 
-        // TODO: Implement Update behavior when the slider is
-        //       changed.
+        #region Output Command Implementation
 
         private bool CanOutput()
         {
@@ -72,9 +71,18 @@ namespace AnalogVoltageController
 
         private void OnOutput()
         {
-            writer.Write(daqTask.Stream, Voltage);
+            try
+            {
+                writer.Write(daqTask.Stream, Voltage);
+            }
+            catch (DaqException)
+            {
+                daqTask.Stop();
+            }
         }
 
-        
+        #endregion
+
+
     }
 }

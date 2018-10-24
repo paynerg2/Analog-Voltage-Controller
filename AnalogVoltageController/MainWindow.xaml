@@ -6,6 +6,7 @@
         xmlns:local="clr-namespace:AnalogVoltageController"
         local:MvvmBehaviors.LoadedMethodName="LoadPhysicalChannels"
         xmlns:converters="clr-namespace:AnalogVoltageController.Converters"
+        xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
     
@@ -15,7 +16,7 @@
     <Window.Resources>
         <converters:ScrollbarToVoltageConverter x:Key="converter" />
     </Window.Resources>
-    
+
     <Grid Background="#222">
         <Grid.RowDefinitions>
             <RowDefinition Height="*" />
@@ -44,12 +45,13 @@
                    Value="{Binding Voltage, TargetNullValue=100, FallbackValue=100,
                         Converter={StaticResource converter},
                         Mode=OneWayToSource}"
-                   Minimum="0" Maximum="200" SmallChange="1"
-                   />
+                   Thumb.DragCompleted="VoltageValueScrollbar_DragCompleted"
+                   Minimum="0" Maximum="200" SmallChange="1">
+        </ScrollBar>
 
-        <Button x:Name="PowerButton"
+        <ToggleButton x:Name="PowerButton"
                 Grid.Row="0" Grid.Column="0"
-                Content="Start" 
+                Content="Start"
                 Command="{Binding OutputCommand }"
                 Height="auto" Width="50"
                 Margin="10"/>

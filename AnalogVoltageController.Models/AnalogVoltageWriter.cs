@@ -35,9 +35,8 @@ namespace AnalogVoltageController.Models
                 var writer = new AnalogSingleChannelWriter(stream);
                 writer.WriteSingleSample(true, voltage);
             }
-            catch(DaqException ex)
+            catch(DaqException)
             {
-                //Handle exception
                 throw;
             }
             
