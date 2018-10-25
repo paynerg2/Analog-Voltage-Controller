@@ -6,9 +6,8 @@
         xmlns:local="clr-namespace:AnalogVoltageController"
         local:MvvmBehaviors.LoadedMethodName="LoadPhysicalChannels"
         xmlns:converters="clr-namespace:AnalogVoltageController.Converters"
-        xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        Title="Analog Voltage Controller" Height="450" Width="600">
     
     <Window.DataContext>
         <local:DashboardViewModel />
@@ -24,13 +23,13 @@
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="*" />
-            <ColumnDefinition Width="*" />
-            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="0.5*" />
+            <ColumnDefinition Width="1.5*" />
+            <ColumnDefinition Width="0.2*" />
         </Grid.ColumnDefinitions>
 
         <ComboBox x:Name="PhysicalChannelComboBox" 
-                  Grid.Row="2" Grid.Column="2" 
+                  Grid.Row="2" Grid.Column="1" 
                   Height="30" Width="200"
                   ItemsSource="{Binding PhysicalChannels}"
                   SelectedItem="{Binding SelectedPhysicalChannel}"/>
@@ -41,7 +40,7 @@
                Content="{Binding Voltage}" />
         <ScrollBar x:Name="VoltageValueScrollbar"
                    Grid.Row="1" Grid.Column="1"
-                   Orientation="Horizontal" Width="auto" Height="30"
+                   Orientation="Horizontal" Width="auto" Height="30" Margin="30"
                    Value="{Binding Voltage, TargetNullValue=100, FallbackValue=100,
                         Converter={StaticResource converter},
                         Mode=OneWayToSource}"
@@ -50,15 +49,15 @@
         </ScrollBar>
 
         <ToggleButton x:Name="PowerButton"
-                Grid.Row="0" Grid.Column="0"
+                Grid.Row="1" Grid.Column="0"
                 Content="Start"
                 Command="{Binding OutputCommand }"
-                Height="auto" Width="50"
+                Height="80" Width="50"
                 Margin="10"/>
 
         <TextBlock x:Name="MessageDisplay"
-                   Grid.Row="1" Grid.Column="2" 
-                   Text="Message to display to user."
+                   Grid.Row="0" Grid.Column="1" 
+                   Text="{Binding DisplayMessage}"
                    Foreground="Azure"
                    TextAlignment="Center"
                    VerticalAlignment="Center"

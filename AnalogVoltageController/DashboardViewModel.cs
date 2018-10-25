@@ -18,7 +18,10 @@ namespace AnalogVoltageController
         public double Voltage
         {
             get { return _voltage; }
-            set { SetProperty(ref _voltage, value); }
+            set
+            {
+                SetProperty(ref _voltage, value);
+            }
         }
 
         public ObservableCollection<string> PhysicalChannels
@@ -36,6 +39,7 @@ namespace AnalogVoltageController
                 if (daqTask != null) daqTask.Stop();
                 daqTask = writer.Initialize(_selectedPhysicalChannel);
                 OutputCommand.RaiseCanExecuteChanged();
+                DisplayMessage = "Ready to output";
             }
         }
 
@@ -78,6 +82,10 @@ namespace AnalogVoltageController
             catch (DaqException)
             {
                 daqTask.Stop();
+            }
+            finally
+            {
+                DisplayMessage = "";
             }
         }
 
