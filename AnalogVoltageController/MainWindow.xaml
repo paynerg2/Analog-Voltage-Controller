@@ -6,63 +6,61 @@
         xmlns:local="clr-namespace:AnalogVoltageController"
         local:MvvmBehaviors.LoadedMethodName="LoadPhysicalChannels"
         xmlns:converters="clr-namespace:AnalogVoltageController.Converters"
-        mc:Ignorable="d"
-        Title="Analog Voltage Controller" Height="450" Width="600">
+        mc:Ignorable="d" Width="350" Height="200"
+        Title="Analog Voltage Controller">
     
     <Window.DataContext>
         <local:DashboardViewModel />
     </Window.DataContext>
     <Window.Resources>
-        <converters:ScrollbarToVoltageConverter x:Key="converter" />
+        <converters:ScrollbarToVoltageConverter x:Key="ScrollbarConverter" />
+        <converters:VoltageToLabelConverter x:Key="LabelConverter" />
     </Window.Resources>
 
     <Grid Background="#222">
         <Grid.RowDefinitions>
-            <RowDefinition Height="*" />
-            <RowDefinition Height="1.8*" />
-            <RowDefinition Height="*" />
+            <RowDefinition Height="auto" />
+            <RowDefinition Height="auto" />
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="0.5*" />
-            <ColumnDefinition Width="1.5*" />
-            <ColumnDefinition Width="0.2*" />
+            <ColumnDefinition Width="auto" />
+            <ColumnDefinition Width="auto" />
         </Grid.ColumnDefinitions>
 
+        <Label x:Name="PhysicalChannelLabel"
+               Grid.Row="1" Grid.Column="1"
+               Foreground="Azure"
+               HorizontalAlignment="Center"
+               Content="Physical Channel" />
         <ComboBox x:Name="PhysicalChannelComboBox" 
                   Grid.Row="2" Grid.Column="1" 
                   Height="30" Width="200"
+                  Margin="25"
                   ItemsSource="{Binding PhysicalChannels}"
                   SelectedItem="{Binding SelectedPhysicalChannel}"/>
 
         <Label x:Name="VoltageValueLabel"
-               Grid.Row="1" Grid.Column="1"
+               Grid.Row="0" Grid.Column="1"
                Foreground="Azure"
-               Content="{Binding Voltage}" />
+               HorizontalAlignment="Center"
+               Content="{Binding Voltage,
+                                 Converter={StaticResource LabelConverter},
+                                 Mode=OneWay}" />
         <ScrollBar x:Name="VoltageValueScrollbar"
-                   Grid.Row="1" Grid.Column="1"
-                   Orientation="Horizontal" Width="auto" Height="30" Margin="30"
+                   Grid.Row="0" Grid.Column="1"
+                   Orientation="Horizontal" Width="200" Height="30" Margin="30"
                    Value="{Binding Voltage, TargetNullValue=100, FallbackValue=100,
-                        Converter={StaticResource converter},
+                        Converter={StaticResource ScrollbarConverter},
                         Mode=OneWayToSource}"
                    Thumb.DragCompleted="VoltageValueScrollbar_DragCompleted"
                    Minimum="0" Maximum="200" SmallChange="1">
         </ScrollBar>
 
         <ToggleButton x:Name="PowerButton"
-                Grid.Row="1" Grid.Column="0"
+                Grid.Row="0" Grid.Column="0"
                 Content="Start"
                 Command="{Binding OutputCommand }"
                 Height="80" Width="50"
                 Margin="10"/>
-
-        <TextBlock x:Name="MessageDisplay"
-                   Grid.Row="0" Grid.Column="1" 
-                   Text="{Binding DisplayMessage}"
-                   Foreground="Azure"
-                   TextAlignment="Center"
-                   VerticalAlignment="Center"
-                   Background="#333"
-                   Width="200" Padding="3"
-                   />
     </Grid>
 </Window>

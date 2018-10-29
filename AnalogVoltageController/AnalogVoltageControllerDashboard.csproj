@@ -66,6 +66,7 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Converters\ScrollbarToVoltageConverter.cs" />
+    <Compile Include="Converters\VoltageToLabelConverter.cs" />
     <Compile Include="MvvmBehaviors.cs" />
     <Compile Include="RelayCommand.cs" />
     <Page Include="MainWindow.xaml">
